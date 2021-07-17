@@ -9,18 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
     public List<Employee> retrieveEmployees() {
-        List<Employee> employees = employeeRepository.findAll();
-        return employees;
+        return employeeRepository.findAll();
     }
 
     public Employee getEmployee(Long employeeId) {
@@ -28,15 +23,15 @@ public class EmployeeServiceImpl implements EmployeeService{
         return optEmp.get();
     }
 
-    public void saveEmployee(Employee employee){
-        employeeRepository.save(employee);
+    public Employee saveEmployee(Employee employee){
+        return employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Long employeeId){
         employeeRepository.deleteById(employeeId);
     }
 
-    public void updateEmployee(Employee employee) {
-        employeeRepository.save(employee);
+    public Employee updateEmployee(Employee employee) {
+       return employeeRepository.save(employee);
     }
 }
