@@ -37,7 +37,7 @@ public class EmployeeControllerTests {
 	private EmployeeService employeeService;
 
 	@Test
-	public void getEmployeesShouldReturnListFromService() throws Exception {
+	public void getEmployeesReturnsListFromService() throws Exception {
 		List<Employee> arrayList = new ArrayList<>();
 		Employee employee = new Employee();
 		employee.setName("coolName");
@@ -48,7 +48,7 @@ public class EmployeeControllerTests {
 	}
 
 	@Test
-	public void getEmployeeWithIdShouldReturnEmployeeFromService() throws Exception {
+	public void getEmployeeWithIdReturnsEmployeeFromService() throws Exception {
 		Employee employee = new Employee();
 		employee.setName("lookedForEmployeeName");
 		employee.setId(987987L);
@@ -76,7 +76,7 @@ public class EmployeeControllerTests {
 	}
 
 	@Test
-	public void deleteEmployee() throws Exception {
+	public void deleteEmployeeRespondOk() throws Exception {
 		Employee employee = new Employee();
 		employee.setName("createdEmployee");
 		employee.setId(987987L);
@@ -101,7 +101,7 @@ public class EmployeeControllerTests {
 	}
 
 	@Test
-	public void updateEmployeeThrowBadRequestWhenEmployeeDoesntExist() throws Exception {
+	public void updateEmployeeThrowsBadRequestWhenEmployeeDoesntExist() throws Exception {
 		Employee employee = new Employee();
 		employee.setName("updatedEmployee");
 		employee.setId(987987L);
