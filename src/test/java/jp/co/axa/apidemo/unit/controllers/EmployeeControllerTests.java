@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import jp.co.axa.apidemo.controllers.EmployeeController;
 import jp.co.axa.apidemo.entities.Employee;
+import jp.co.axa.apidemo.errors.UnknownEmployee;
 import jp.co.axa.apidemo.services.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,13 +13,14 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,7 +42,7 @@ public class EmployeeControllerTests {
 		Employee employee = new Employee();
 		employee.setName("coolName");
 		arrayList.add(employee);
-		when(employeeService.retrieveEmployees()).thenReturn(arrayList);
+		when(employeeService.getEmployees()).thenReturn(arrayList);
 		this.mockMvc.perform(get("/api/v1/employees")).andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].name", is("coolName")));
 	}
@@ -50,7 +52,7 @@ public class EmployeeControllerTests {
 		Employee employee = new Employee();
 		employee.setName("lookedForEmployeeName");
 		employee.setId(987987L);
-		when(employeeService.getEmployee(employee.getId())).thenReturn(employee);
+		when(employeeService.getEmployeeById(employee.getId())).thenReturn(employee);
 		this.mockMvc.perform(get("/api/v1/employees/" + employee.getId())).andExpect(status().isOk())
 				.andExpect(jsonPath("$.name", is("lookedForEmployeeName")))
 				.andExpect(jsonPath("$.id", is(987987)));
@@ -86,8 +88,7 @@ public class EmployeeControllerTests {
 		Employee employee = new Employee();
 		employee.setName("updatedEmployee");
 		employee.setId(987987L);
-		when(employeeService.getEmployee(anyLong())).thenReturn(employee);
-		when(employeeService.updateEmployee(ArgumentMatchers.any())).thenReturn(employee);
+		when(employeeService.updateEmployeeById(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(employee);
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -104,7 +105,7 @@ public class EmployeeControllerTests {
 		Employee employee = new Employee();
 		employee.setName("updatedEmployee");
 		employee.setId(987987L);
-		when(employeeService.updateEmployee(ArgumentMatchers.any())).thenReturn(null);
+		when(employeeService.updateEmployeeById(ArgumentMatchers.any(), ArgumentMatchers.any())).thenThrow(new UnknownEmployee());
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
