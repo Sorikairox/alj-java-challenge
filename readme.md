@@ -43,10 +43,19 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 - Is the application running as expected
 - No performance issues
 
-#### Your experience in Java
 
-Please let us know more about your Java experience in a few sentences. For example:
+### What did I do ?
 
-- I have 3 years experience in Java and I started to use Spring Boot from last year
-- I'm a beginner and just recently learned Spring Boot
-- I know Spring Boot very well and have been using it for many years
+- Read how to unit test Spring Boot app.
+- I wrote unit test for EmployeeController, and renamed/fixed things.
+- I wrote unit test for EmployeeServiceImpl.
+- I wrote e2e test for all API endpoints
+
+
+### My experience in Java
+
+It was my first time using Java. Yes, you read that right, no missing words. I'm used to Javascript/Typescript.<br>However, I strongly believe that the language I use is irrelevant, as long as it is Object-Oriented.
+
+Why ?
+
+Simply because 2 years ago I started a journey to become a Software Craftsman, all the things I learn and practice along the way apply to every OOP languages. <br>I might not know every method of the `ArrayList` class, but I am trying my best to write clean code as defined by [Robert C Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882).
