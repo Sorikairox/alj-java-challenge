@@ -11,8 +11,11 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
+
+    EmployeeServiceImpl(@Autowired EmployeeRepository repository) {
+        this.employeeRepository = repository;
+    }
 
     public List<Employee> retrieveEmployees() {
         return employeeRepository.findAll();

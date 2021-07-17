@@ -14,8 +14,11 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+
+    EmployeeController(@Autowired EmployeeService service) {
+        this.employeeService = service;
+    }
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
