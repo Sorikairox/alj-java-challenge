@@ -7,6 +7,8 @@ import jp.co.axa.apidemo.controllers.EmployeeController;
 import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.errors.UnknownEmployee;
 import jp.co.axa.apidemo.services.EmployeeService;
+import jp.co.axa.apidemo.services.HardCodedUserService;
+import jp.co.axa.apidemo.services.JwtService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
@@ -33,6 +35,12 @@ public class EmployeeControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
+
+	@MockBean
+	JwtService jwtService;
+
+	@MockBean
+	HardCodedUserService hardCodedUserService;
 
 	@MockBean
 	private EmployeeService employeeService;
