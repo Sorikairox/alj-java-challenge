@@ -112,5 +112,35 @@ public class EmployeeControllerTest {
 		mockMvc.perform(delete("/api/v1/employees/1").header("Authorization", "Bearer " + token))
 				.andExpect(status().isBadRequest());
 	}
+	@Test
+	public void stage_07_addEmployeeForbiddenWhenNoTokenGiven() throws Exception {
+
+		mockMvc.perform(post("/api/v1/employees").contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	public void stage_08_getEmployeesForbiddenWhenNoTokenGiven() throws Exception {
+		mockMvc.perform(get("/api/v1/employees"))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	public void stage_09_getOneEmployeeForbiddenWhenNoTokenGiven() throws Exception {
+		mockMvc.perform(get("/api/v1/employees/1"))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	public void stage_10_putEmployeeForbiddenWhenNoTokenGiven() throws Exception {
+		mockMvc.perform(put("/api/v1/employees/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isForbidden());
+	}
+
+	@Test
+	public void stage_11_deleteEmployeeWhenEmployeeExistForbiddenWhenNoTokenGiven() throws Exception {
+		mockMvc.perform(delete("/api/v1/employees/1"))
+				.andExpect(status().isForbidden());
+	}
 
 }
