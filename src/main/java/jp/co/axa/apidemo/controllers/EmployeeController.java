@@ -4,9 +4,9 @@ import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.errors.UnknownEmployee;
 import jp.co.axa.apidemo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -37,8 +37,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{employeeId}")
-    public void deleteEmployee(@PathVariable(name="employeeId")Long employeeId){
-        employeeService.deleteEmployeeById(employeeId);
+    public void deleteEmployee(@PathVariable(name="employeeId")Long employeeId) {
+        try {
+            employeeService.deleteEmployeeById(employeeId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown Employee");
+        }
     }
 
     @PutMapping("/employees/{employeeId}")
