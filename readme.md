@@ -20,10 +20,10 @@ For the test sake, I wanted to implement JWT authentication, not a whole Users m
 ## What could be improved ?
 
 - Add user management and remove hardcoded foo:bar user
-- Unit test `JwtRequestFilter` and `JwtService` they are only tested implicitly via e2e test
+- Unit test `JwtRequestFilter` and `JwtService` as they are only tested implicitly via e2e tests
 - File and package architecture. For example, I feel like `SecurityConfigurer` doesn't belong in the `services` package, yet examples I've seen around put it here...
 - Upgrade to Junit5 to use `@Order` annotation in test instead of using alphabetical order
-
+- `JwtRequestFilter` readability
 ## My experience in Java
 
 It was my first time using Java. Yes, you read that right, no missing words. I'm used to Javascript/Typescript.<br>However, I strongly believe that the language I use is irrelevant, as long as it is Object-Oriented.
